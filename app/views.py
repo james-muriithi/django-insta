@@ -94,4 +94,5 @@ def follow_user(request, user_id):
 
 @login_required()
 def profile(request, user=None):
-    return render(request, 'profile.html')
+    images = user.images if user else request.user.images
+    return render(request, 'profile.html', {'images': images.all()})
