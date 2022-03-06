@@ -38,9 +38,9 @@
                         <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal-{{image.id}}">
                             <span class="material-icons">edit</span>
                         </button>
-                        <button class="btn ms-auto text-danger">
+                        <a href="{% url 'image_delete' image_id=image.id %}" class="btn ms-auto text-danger">
                             <span class="material-icons">delete</span>
-                        </button>
+                        </a>
                     </div>
                 </div>
                 {% include 'partials/edit-image-modal.html'   %}

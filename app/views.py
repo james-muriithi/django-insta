@@ -7,7 +7,7 @@ import cloudinary.uploader
 import cloudinary.api
 
 from app.forms import UploadImageForm
-from .models import Comments, Follower, Image, Likes, User
+from .models import Comments, Follower, Image, Likes, Profile, User
 
 # Create your views here.
 
@@ -119,6 +119,7 @@ def profile(request, user=None):
     images = user.images if user else request.user.images
     return render(request, 'profile.html', {'images': images.all()})
 
+
 @login_required()
 def user_profile(request, user_id):
     user = User.objects.get(username=user_id)
@@ -139,4 +140,31 @@ def search_images(request):
         return render(request, 'search.html', {'success': message, 'images': images})
     else:
         message = 'You havent searched for any term'
-        return render(request, 'search.html', {'danger': message})    
+        return render(request, 'search.html', {'danger': message})
+
+
+@login_required()
+def update_profile(request):
+    if request.method == 'POST':
+
+        current_user = request.user
+
+        bio = request.POST['bio']
+
+        profile_image = request.FILES['avatar']
+        profile_image = cloudinary.uploader.upload(profile_image)
+        avatar = profile_image['url']
+
+        # check if user exists in profile table and if not create a new profile
+        if Profile.objects.filter(user_id=current_user.id).exists():
+
+            profile = Profile.objects.get(user=current_user).first()
+            profile.avatar = avatar
+            profile.bio = bio
+            profile.save()
+        else:
+            profile = Profile(user=current_user,
+                              avatar=avatar, bio=bio)
+            profile.save_profile()
+
+    return redirect(request.META.get('HTTP_REFERER') or 'index')
