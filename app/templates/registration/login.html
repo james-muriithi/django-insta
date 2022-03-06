@@ -8,7 +8,8 @@
                 <div class="pitch-card px-3 py-4 bg-white shadow">
                     <h2 class="fw-bold text-center fs-5">Login</h2>
                     <div class="pt-5">
-                        <form action="" class="">
+                        <form action="" method="post" class="">
+                            {% csrf_token %}
                             <div class="form-group">
                                 <label for="" class="form-label text-sm">Email</label>
                                 <input type="text" class="form-control">
@@ -30,7 +31,7 @@
                             </div>
                             <div class="pt-4">
                                 <small class="fw-bold">
-                                    Don’t have an account? <a href="signup.html" class="">Signup</a>
+                                    Don’t have an account? <a href="{% url 'django_registration_register' %}" class="">Signup</a>
                                 </small>
                             </div>
                         </form>
