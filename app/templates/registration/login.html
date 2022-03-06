@@ -8,7 +8,7 @@
                 <div class="pitch-card px-3 py-4 bg-white shadow">
                     <h2 class="fw-bold text-center fs-5">Login</h2>
                     <div class="pt-5">
-                        {% if form.non_field_errors %}
+                        {% if form.non_field_errors|length > 0 %}
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             {% for error in form.non_field_errors %}
                             {{ error|escape }}

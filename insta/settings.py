@@ -34,7 +34,7 @@ ACCOUNT_ACTIVATION_DAYS = 14 # One-week activation window
 
 REGISTRATION_OPEN=True
 
-# AUTH_USER_MODEL = 'app.User'
+AUTH_USER_MODEL = 'app.User'
 
 # Application definition
 
@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'insta.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gallery',
+        'NAME': 'insta',
         'USER': config('DB_USER', default=''),
         'PASSWORD':config('DB_PASSWORD', default=''),
     },
