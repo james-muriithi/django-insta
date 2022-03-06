@@ -1,31 +1,20 @@
 {% extends 'base.html' %}
 
 {% block 'content' %}
-<section id="body" class="pt-5">
-    <div class="container-xl pt-4 pt-xl-5">
-        <div class="users d-flex">
-            <div class="user-profile me-3 center border border-primary rounded-circle img-80">
-                <span class="material-icons fs-2 text-primary">add</span>
-            </div>
-            <a href="#" class="user-profile p-1 me-3 center border border-primary rounded-circle img-80">
-                <img src="https://ui-avatars.com/api/?name=James+Muriithi&background=fff&color=8655ff" alt=""
-                    class="rounded-circle w-100 h-100">
-            </a>
-            <a href="#" class="user-profile p-1 me-3 center border border-primary rounded-circle img-80">
-                <img src="https://avatars.githubusercontent.com/u/26818458?v=4" alt=""
-                    class="rounded-circle h-100 w-100">
-            </a>
-        </div>
-    </div>
-</section>
+
+{% include 'partials/stories.html'   %}
 
 <section class="py-5 posts container-sm" id="posts">
     <div class="row mx-0">
-        <div class="col-lg-7 bg-light py-3 px-0">
-            {{suggested_followers}}
-            {% for image in images %}
-            {% include 'partials/image-card.html' %}
-            {% endfor %}
+        <div class="col-lg-7 px-0">
+            <div class="bg-light py-3">
+                {% for image in images %}
+                {% include 'partials/image-card.html' %}
+                {% endfor %}
+                {% if images|length == 0 %}
+                <p class="text-center">No images yet</p>
+                {% endif %}
+            </div>
         </div>
         {% include 'partials/suggestions.html' %}
     </div>

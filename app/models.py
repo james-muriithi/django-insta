@@ -23,14 +23,18 @@ class User(AbstractUser):
     @property
     def avatar(self):
         return f'https://ui-avatars.com/api/?name={self.url_formatted_name}&background=8655ff&color=fff'
-   
+
+    @property
+    def user_followers(self):
+        followers = self.followers.values_list('id', flat=True)
+        followers = list(followers)
+        followers.append(self.id)
+        return followers
 
     @classmethod
-    def  suggested_follows(cls, user):
-        followers = user.followers.values_list('id', flat=True)
-        followers = list(followers)
-        followers.append(user.id)
-        users = cls.objects.exclude(id__in=followers)
+    def suggested_follows(cls, user):
+
+        users = cls.objects.exclude(id__in=user.user_followers)
         return users
 
 # image model
@@ -81,6 +85,11 @@ class Image(models.Model):
     def get_image(cls, id):
         return cls.objects.get(id=id)
 
+    @classmethod
+    def user_timeline_images(cls, user):
+        images = cls.objects.filter(user__id__in=user.user_followers)
+        return images
+
 
 # profile model
 class Profile(models.Model):
@@ -105,7 +114,8 @@ class Profile(models.Model):
 
 # likes model
 class Likes(models.Model):
-    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='likes')
+    image = models.ForeignKey(
+        Image, on_delete=models.CASCADE, related_name='likes')
     vote = models.SmallIntegerField(default=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

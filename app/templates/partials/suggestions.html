@@ -4,30 +4,19 @@
             Suggested for you
         </h5>
         <div class="suggestions pt-3">
+            {% for suggestion in suggested_followers %}
             <div class="suggestion-card mb-3">
                 <div class="d-flex align-items-center">
-                    <img src="https://avatars.githubusercontent.com/u/26818458?v=4" alt=""
+                    <img src="{{suggestion.avatar}}" alt=""
                         class="img-30 rounded-circle">
-                    <h6 class="fw-bold ps-3 text-capitalize mb-0">John Doe</h6>
+                    <h6 class="fw-bold ps-3 text-capitalize mb-0">{{suggestion.full_name}}</h6>
                     <a href="#" class="ms-auto fw-bold text-sm">Follow</a>
                 </div>
             </div>
-            <div class="suggestion-card mb-3">
-                <div class="d-flex align-items-center">
-                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=fff&color=8655ff"
-                        alt="" class="img-30 rounded-circle">
-                    <h6 class="fw-bold ps-3 text-capitalize mb-0">John Doe</h6>
-                    <a href="#" class="ms-auto fw-bold text-sm">Follow</a>
-                </div>
-            </div>
-            <div class="suggestion-card mb-3">
-                <div class="d-flex align-items-center">
-                    <img src="https://ui-avatars.com/api/?name=David+Woe&background=fff&color=8655ff"
-                        alt="" class="img-30 rounded-circle">
-                    <h6 class="fw-bold ps-3 text-capitalize mb-0">David Woe</h6>
-                    <a href="#" class="ms-auto fw-bold text-sm">Follow</a>
-                </div>
-            </div>
+            {% endfor %}
+            {% if suggested_followers|length == 0 %}
+                No suggestions yet
+            {% endif %}
         </div>
         <div class="pt-4">
             <p class="text-muted copyright text-sm">

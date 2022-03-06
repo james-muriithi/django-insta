@@ -12,7 +12,7 @@ from .models import Image, User
 
 @login_required()
 def index(request):
-    images = Image.get_images_by_user(request.user)
+    images = Image.user_timeline_images(request.user)
     suggested_followers = User.suggested_follows(user=request.user)
     return render(request, 'index.html', {'images': images, 'suggested_followers': suggested_followers})
 

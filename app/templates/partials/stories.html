@@ -4,14 +4,12 @@
             <div class="user-profile me-3 center border border-primary rounded-circle img-80">
                 <span class="material-icons fs-2 text-primary">add</span>
             </div>
+            {% for suggestion in suggested_followers %}
             <a href="#" class="user-profile p-1 me-3 center border border-primary rounded-circle img-80">
-                <img src="https://ui-avatars.com/api/?name=James+Muriithi&background=fff&color=8655ff" alt=""
+                <img src="{{suggestion.avatar}}" alt=""
                     class="rounded-circle w-100 h-100">
             </a>
-            <a href="#" class="user-profile p-1 me-3 center border border-primary rounded-circle img-80">
-                <img src="https://avatars.githubusercontent.com/u/26818458?v=4" alt=""
-                    class="rounded-circle h-100 w-100">
-            </a>
+            {% endfor %}
         </div>
     </div>
 </section>
