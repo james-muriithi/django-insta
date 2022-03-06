@@ -8,7 +8,9 @@
             <div class="post-card">
                 <div class="user-details d-flex border-bottom border-default align-items-center pb-2 px-2">
                     <img src="{{image.user.avatar}}" alt="{{image.user}}" class="img-40 rounded-circle">
-                    <h5 class="fw-bold ps-3 text-capitalize mb-0">{{image.user.full_name}}</h5>
+                    <a href="{% url 'user_profile' user_id=image.user.id %}">
+                        <h5 class="fw-bold ps-3 text-capitalize mb-0 text-dark">{{image.user.full_name}}</h5>
+                    </a>
                 </div>
                 <div class="post-details">
                     <img src="{{image.image_url}}" alt="{{image.title}}" class="post-image img-fluid">
@@ -24,7 +26,7 @@
                             <span class="material-icons">&#xe87e</span>
                         </a>
                         {% endif %}
-                        
+
                         <button class="btn btn-sm pt-0">
                             <img src="{% static 'images/comment.svg' %}" alt="" class="img-fluid">
                         </button>

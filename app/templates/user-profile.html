@@ -22,7 +22,8 @@
                 </div>
             </div>
             <div class=" text-end col-12 col-sm mt-3 mt-sm-0">
-                <button class="btn btn-primary text-white px-3 btn-sm">Follow</button>
+                <a href="{% url 'follow_user' user_id=usr.username %}"
+                    class="btn btn-primary text-white px-3 btn-sm">Follow</a>
             </div>
         </div>
         <div class="pt-4">

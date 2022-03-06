@@ -7,15 +7,16 @@
             {% for suggestion in suggested_followers %}
             <div class="suggestion-card mb-3">
                 <div class="d-flex align-items-center">
-                    <img src="{{suggestion.avatar}}" alt=""
-                        class="img-30 rounded-circle">
-                    <h6 class="fw-bold ps-3 text-capitalize mb-0">{{suggestion.full_name}}</h6>
+                    <img src="{{suggestion.avatar}}" alt="" class="img-30 rounded-circle">
+                    <a href="{% url 'user_profile' user_id=suggestion.username %}">
+                        <h6 class="fw-bold ps-3 text-capitalize mb-0 text-dark">{{suggestion.full_name}}</h6>
+                    </a>
                     <a href="{% url 'follow_user' user_id=suggestion.id %}" class="ms-auto fw-bold text-sm">Follow</a>
                 </div>
             </div>
             {% endfor %}
             {% if suggested_followers|length == 0 %}
-                No suggestions yet
+            No suggestions yet
             {% endif %}
         </div>
         <div class="pt-4">

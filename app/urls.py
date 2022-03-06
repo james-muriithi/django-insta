@@ -9,5 +9,6 @@ urlpatterns = [
     path('single-image/<image_id>/comment', views.save_comment, name="save_comment"),
     path('single-image/<id>/like', views.like_image, name="like_image"),
     path('follow/<user_id>', views.follow_user, name="follow_user"),
-    path('profile', views.profile, name='profile')
+    path('profile', views.profile, name='profile'),
+    path('user/<user_id>', views.user_profile, name='user_profile')
 ]
