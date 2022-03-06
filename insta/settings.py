@@ -35,6 +35,8 @@ ACCOUNT_ACTIVATION_DAYS = 14 # One-week activation window
 REGISTRATION_OPEN=True
 
 AUTH_USER_MODEL = 'app.User'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 # Application definition
 

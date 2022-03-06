@@ -6,6 +6,7 @@
         <a class="navbar-brand" href="/">
             <img src="{% static './images/logo.png' %}" alt="Logo" class="img-fluid">
         </a>
+        {% if user.is_authenticated %}
         <div class="d-flex ms-auto align-items-center pe-0">
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -41,23 +42,19 @@
                         <span class="d-block d-lg-none">Add post</span>
                     </a>
                 </li>
-                <li class="nav-item px-2">
-                    <a class="nav-link" href="./login.html">
-                        Login
-                    </a>
-                </li>
                 <li class="nav-item px-2 mb-3 mb-lg-0">
 
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://ui-avatars.com/api/?name=James+Muriithi&background=8655ff&color=fff" alt=""
-                            class="avatar rounded-circle img-30">
+                        <img src="{{user.avatar}}"
+                            alt="" class="avatar rounded-circle img-30">
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end bg-primary" aria-labelledby="navbarDropdown"
                         data-bs-popper="none">
-                        <a class="dropdown-item bg-primary text-white" href="./profile.html">Profile</a>
-                        <a class="dropdown-item bg-primary text-white d-flex align-item-center" href="index.html">
+                        <a class="dropdown-item bg-primary text-white" href="/">Profile</a>
+                        <a class="dropdown-item bg-primary text-white d-flex align-item-center"
+                            href="{% url 'logout' %}">
                             Logout
                             <span class="material-icons fs-4 text-white ps-2">logout</span>
                         </a>
@@ -66,6 +63,7 @@
                 </li>
             </ul>
         </div>
+        {% endif %}
     </div>
 </nav>
 <!-- end navbar -->
