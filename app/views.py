@@ -1,3 +1,4 @@
+from pyexpat.errors import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 import cloudinary
@@ -45,9 +46,9 @@ def save_comment(request, image_id):
         comment = request.POST['comment']
         image = Image.objects.get(id=image_id)
         comment = Comments(comment=comment, image=image,
-                           user_id=request.user.id)
+                           user=request.user)
         comment.save_comment()
 
-        return redirect('single-image', id=image_id)
+        return redirect('single_image', id=image_id)
     else:
-        return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER') or 'index') 

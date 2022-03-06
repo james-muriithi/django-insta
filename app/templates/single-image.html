@@ -32,11 +32,14 @@
             </div>
             <div class="comments px-2">
                 <div class="post-comment d-flex pb-3">
-                    <img src="{{user.avatar}}" alt=""
-                        class="img-30 rounded-circle">
+                    <img src="{{user.avatar}}" alt="" class="img-30 rounded-circle">
                     <div class="col ps-2">
-                        <input type="text" class="border border-primary form-control w-100 rounded-pill text-primary"
-                            placeholder="Write a comment...">
+                        <form action="{% url 'save_comment' image_id=image.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="text" required name="comment"
+                                class="border border-primary form-control w-100 rounded-pill text-primary"
+                                placeholder="Write a comment...">
+                        </form>
                         <p class="text-muted text-sm">Press enter to post</p>
                     </div>
                 </div>
@@ -45,8 +48,9 @@
                     <div class="">
                         <img src="{{ comment.user.avatar }}" alt="" class="img-30 rounded-circle">
                     </div>
-                    <div class="ps-2">
-                        <p class="">{{comment.comment}}</p>
+                    <div class="ps-2 col">
+                        <p class="mb-1">{{comment.comment}}</p>
+                        <p class="text-end text-xs">{{comment.created_at}}</p>
                     </div>
                 </div>
                 {% endfor %}
