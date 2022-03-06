@@ -86,6 +86,9 @@ class Image(models.Model):
         images = cls.objects.filter(user__id__in=user.user_followers)
         return images
 
+    def __str__(self):
+        return self.title 
+
 
 # profile model
 class Profile(models.Model):
@@ -119,6 +122,8 @@ class Likes(models.Model):
     def __str__(self):
         return self.image
 
+    class Meta:
+        verbose_name_plural='Likes'
 
 # comments model
 class Comments(models.Model):
@@ -132,6 +137,8 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.comment
+    class Meta:
+        verbose_name_plural='Comments'
 
 # follower model
 
