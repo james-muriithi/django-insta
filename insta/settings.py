@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,6 +29,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+ACCOUNT_ACTIVATION_DAYS = 14 # One-week activation window
+
+REGISTRATION_OPEN=True
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
+    'django_registration',
 ]
 
 MIDDLEWARE = [
