@@ -33,7 +33,17 @@
                     <div class="post-card">
                         <img src="{{image.image_url}}" alt="" class="post-image img-fluid">
                     </div>
+                    <h6 class="mb-0 fw-bold mt-1">{{image.title}}</h6>
+                    <div class="d-flex">
+                        <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal-{{image.id}}">
+                            <span class="material-icons">edit</span>
+                        </button>
+                        <button class="btn ms-auto text-danger">
+                            <span class="material-icons">delete</span>
+                        </button>
+                    </div>
                 </div>
+                {% include 'partials/edit-image-modal.html'   %}
                 {% endfor %}
             </div>
         </div>

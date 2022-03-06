@@ -76,8 +76,9 @@ class Image(models.Model):
         self.delete()
 
     # update image caption
-    def update_caption(self, caption):
-        self.image_caption = caption
+    def update_caption(self, caption, title):
+        self.caption = caption
+        self.title = title
         self.save()
 
     #  get a single image using id

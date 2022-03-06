@@ -1,0 +1,29 @@
+<div class="modal fade" id="exampleModal-{{image.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Photo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'image_update' image_id=image.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="image_name">Name</label>
+                        <input type="text" class="form-control" value="{{image.title}}" name="title" required="">
+                    </div>
+                    <input type="hidden" name="user_id" value="38">
+                    <div class="form-group mt-3">
+                        <label for="exampleFormControlTextarea1">Caption</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="caption"
+                            required="">{{image.caption}}</textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary text-white">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

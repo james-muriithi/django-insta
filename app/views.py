@@ -34,6 +34,28 @@ def upload(request):
     return redirect(request.META.get('HTTP_REFERER'), {'error': 'Image Uploaded Successfully'})
 
 
+@login_required
+def image_update(request, image_id):
+    image = Image.get_image(image_id)
+
+    if request.method == 'POST':
+        caption = request.POST['caption']
+        title = request.POST['title']
+
+        image.update_caption(caption, title)
+
+        return redirect(request.META.get('HTTP_REFERER') or 'index')
+
+
+@login_required
+def image_delete(request, image_id):
+    image = Image.get_image(image_id)
+
+    image.delete_image()
+
+    return redirect(request.META.get('HTTP_REFERER') or 'index')
+
+
 @login_required()
 def single_image(request, id):
     image = Image.get_image(id)
@@ -103,3 +125,18 @@ def user_profile(request, user_id):
 
     images = user.images
     return render(request, 'user-profile.html', {'images': images.all(), 'usr': user})
+
+
+# search for images
+@login_required()
+def search_images(request):
+    if 'search' in request.GET and request.GET['search']:
+        search_term = request.GET.get('search').lower()
+        images = Image.search_by_image_name(search_term)
+        message = f'{search_term}'
+        title = message
+
+        return render(request, 'search.html', {'success': message, 'images': images})
+    else:
+        message = 'You havent searched for any term'
+        return render(request, 'search.html', {'danger': message})    
