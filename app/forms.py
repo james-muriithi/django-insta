@@ -1,10 +1,15 @@
+from django import forms
 from django_registration.forms import RegistrationForm
 
-from .models import User
+from .models import Image, User
 
 
 class MyCustomUserForm(RegistrationForm):
     class Meta:
         model = User
-        exclude = ()
         fields = ('username','email', 'full_name')
+
+class UploadImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ('title', 'caption', 'image')

@@ -8,7 +8,7 @@ from cloudinary.models import CloudinaryField
 
 class User(AbstractUser):
     full_name = models.CharField(max_length=124)
-    email = models.CharField(max_length=124,unique=True)
+    email = models.CharField(max_length=124, unique=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
@@ -29,8 +29,18 @@ class Image(models.Model):
     image = CloudinaryField('image')
     title = models.CharField(max_length=124)
     caption = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     like_count = models.IntegerField(default=0)
     comment_count = models.IntegerField(default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    # get images by user
+
+    @classmethod
+    def get_images_by_user(cls, user):
+        images = cls.objects.filter(user=user)
+        return images
+
+    # save image
+    def save_image(self):
+        self.save()
