@@ -6,7 +6,7 @@ import cloudinary.uploader
 import cloudinary.api
 
 from app.forms import UploadImageForm
-from .models import Comments, Image, User
+from .models import Comments, Image, Likes, User
 
 # Create your views here.
 
@@ -51,4 +51,20 @@ def save_comment(request, image_id):
 
         return redirect('single_image', id=image_id)
     else:
-        return redirect(request.META.get('HTTP_REFERER') or 'index') 
+        return redirect(request.META.get('HTTP_REFERER') or 'index')
+
+
+# like image
+@login_required(login_url='/accounts/login/')
+def like_image(request, id):
+    like = Likes.objects.filter(image_id=id, user_id=request.user.id).first()
+    # check if the user has already liked the image
+    if Likes.objects.filter(image_id=id, user_id=request.user.id).exists():
+        # unlike the image
+        like.delete()
+
+        return redirect(request.META.get('HTTP_REFERER') or 'index')
+    else:
+        like = Likes(image_id=id, user=request.user)
+        like.save()
+        return redirect(request.META.get('HTTP_REFERER') or 'index')

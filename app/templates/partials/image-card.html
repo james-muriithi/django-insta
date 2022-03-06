@@ -11,12 +11,18 @@
     </a>
     <div class="cta pt-2">
         <div class="d-flex justify-content-center">
-            <button class="btn btn-sm me-1">
+            {% if user.id == image.user.id %}
+            <button disabled class="btn btn-sm me-1">
                 <span class="material-icons">&#xe87e</span>
             </button>
-            <button class="btn btn-sm pt-0">
-                <img src="{% static 'images/comment.svg' %}" alt="" class="img-fluid">
-            </button>
+            {% else %}
+            <a href="{% url 'like_image' id=image.id %}" class="btn btn-sm me-1">
+                <span class="material-icons">&#xe87e</span>
+            </a>
+            {% endif %}
+            <a href="{% url 'single_image' id=image.id  %}#comment" class="btn btn-sm">
+                <img src="{% static 'images/comment.svg' %}" alt="" class="img-fluid" style="height: 21px;">
+            </a>
 
             <div class="date ms-auto text-muted pe-2">
                 {{image.created_at}}

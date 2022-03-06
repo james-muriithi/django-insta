@@ -15,9 +15,16 @@
                 </div>
                 <div class="cta pt-2">
                     <div class="d-flex justify-content-center">
-                        <a href="#" class="btn btn-sm me-1">
+                        {% if user.id == image.user.id %}
+                        <button disabled class="btn btn-sm me-1">
+                            <span class="material-icons">&#xe87e</span>
+                        </button>
+                        {% else %}
+                        <a href="{% url 'like_image' id=image.id %}" class="btn btn-sm me-1">
                             <span class="material-icons">&#xe87e</span>
                         </a>
+                        {% endif %}
+                        
                         <button class="btn btn-sm pt-0">
                             <img src="{% static 'images/comment.svg' %}" alt="" class="img-fluid">
                         </button>
@@ -31,7 +38,7 @@
                     </p>
                 </div>
             </div>
-            <div class="comments px-2">
+            <div class="comments px-2" id="comment">
                 <div class="post-comment d-flex pb-3">
                     <img src="{{user.avatar}}" alt="" class="img-30 rounded-circle">
                     <div class="col ps-2">

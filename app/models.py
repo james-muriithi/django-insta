@@ -30,7 +30,7 @@ class User(AbstractUser):
     @classmethod
     def suggested_follows(cls, user):
 
-        users = cls.objects.exclude(id__in=user.user_followers)
+        users = cls.objects.exclude(id__in=user.user_followers).exclude(is_superuser=True)
         return users
 
 # image model

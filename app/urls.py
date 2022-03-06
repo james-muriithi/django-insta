@@ -7,4 +7,5 @@ urlpatterns = [
     path('upload', views.upload, name="upload"),
     path('single-image/<id>', views.single_image, name="single_image"),
     path('single-image/<image_id>/comment', views.save_comment, name="save_comment"),
+    path('single-image/<id>/like', views.like_image, name="like_image"),
 ]
