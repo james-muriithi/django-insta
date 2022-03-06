@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block 'content' %}
 <section class="py-5 posts container-xl" id="posts">
@@ -18,7 +19,7 @@
                             <span class="material-icons">&#xe87e</span>
                         </a>
                         <button class="btn btn-sm pt-0">
-                            <img src="./images/comment.svg" alt="" class="img-fluid">
+                            <img src="{% static 'images/comment.svg' %}" alt="" class="img-fluid">
                         </button>
 
                         <div class="date ms-auto text-muted pe-2">

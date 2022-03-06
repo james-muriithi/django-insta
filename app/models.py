@@ -51,7 +51,7 @@ class Image(models.Model):
 
     @property
     def all_comments(self):
-        return self.comments.all()    
+        return self.comments.all()
 
     @property
     def comments_count(self):
@@ -91,7 +91,10 @@ class Image(models.Model):
         return images
 
     def __str__(self):
-        return self.title 
+        return self.title
+
+    class Meta:
+        ordering = ['-created_at']
 
 
 # profile model
@@ -127,12 +130,16 @@ class Likes(models.Model):
         return self.image
 
     class Meta:
-        verbose_name_plural='Likes'
+        verbose_name_plural = 'Likes'
 
 # comments model
+
+
 class Comments(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
-    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name="comments")
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="comments")
+    image = models.ForeignKey(
+        Image, on_delete=models.CASCADE, related_name="comments")
     comment = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -141,8 +148,10 @@ class Comments(models.Model):
 
     def __str__(self):
         return self.comment
+
     class Meta:
-        verbose_name_plural='Comments'
+        verbose_name_plural = 'Comments'
+        ordering = ['-created_at']
 
 # follower model
 
@@ -155,3 +164,6 @@ class Follower(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    class Meta:
+        ordering = ['-created_at']
