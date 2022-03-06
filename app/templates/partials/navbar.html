@@ -1,0 +1,72 @@
+<!-- navbar -->
+{% load static %}
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent position-absolute w-100">
+    <div class="container-fluid w-100">
+        <a class="navbar-brand" href="/">
+            <img src="{% static './images/logo.png' %}" alt="Logo" class="img-fluid">
+        </a>
+        <div class="d-flex ms-auto align-items-center pe-0">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse bg-transparent" id="navbarSupportedContent">
+            <ul class="navbar-nav mt-4 mt-lg-0 text-white ms-auto">
+                <li class="nav-item ps-lg-4 pe-4 ps-2 mb-4 mb-lg-0 d-flex align-items-center">
+                    <span class="position-relative search">
+                        <span class="material-icons ps-1 text-primary position-absolute search-icon">search</span>
+                        <input type="text" class="border border-primary form-control rounded text-primary"
+                            placeholder="search here..">
+
+                    </span>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link active" aria-current="page" href="/">
+                        <span class="material-icons fs-3 d-lg-inline-block d-none">home</span>
+                        <span class="d-block d-lg-none">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="/">
+                        <span class="material-icons fs-3 d-lg-inline-block d-none favorite_border">&#xe87e</span>
+                        <span class="d-block d-lg-none">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="/">
+                        <span class="material-icons fs-3 d-lg-inline-block d-none add_box">&#xe146;</span>
+                        <span class="d-block d-lg-none">Add post</span>
+                    </a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" href="./login.html">
+                        Login
+                    </a>
+                </li>
+                <li class="nav-item px-2 mb-3 mb-lg-0">
+
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://ui-avatars.com/api/?name=James+Muriithi&background=8655ff&color=fff" alt=""
+                            class="avatar rounded-circle img-30">
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-end bg-primary" aria-labelledby="navbarDropdown"
+                        data-bs-popper="none">
+                        <a class="dropdown-item bg-primary text-white" href="./profile.html">Profile</a>
+                        <a class="dropdown-item bg-primary text-white d-flex align-item-center" href="index.html">
+                            Logout
+                            <span class="material-icons fs-4 text-white ps-2">logout</span>
+                        </a>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- end navbar -->
+<!-- end navbar -->
