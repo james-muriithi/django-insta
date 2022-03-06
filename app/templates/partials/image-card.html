@@ -6,7 +6,7 @@
             <h5 class="fw-bold ps-3 text-capitalize mb-0 text-dark">{{image.user.full_name}}</h5>
         </a>
     </div>
-    <a href="/" class="post-details">
+    <a href="{% url 'single_image' id=image.id %}" class="post-details">
         <img src="{{image.image_url}}" alt="" class="post-image img-fluid">
     </a>
     <div class="cta pt-2">

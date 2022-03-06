@@ -10,7 +10,7 @@ class User(AbstractUser):
     full_name = models.CharField(max_length=124)
     email = models.CharField(max_length=124, unique=True)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['username', 'full_name']
 
     @property
     def url_formatted_name(self):
@@ -48,6 +48,10 @@ class Image(models.Model):
     @property
     def likes_count(self):
         return self.likes.count()
+
+    @property
+    def all_comments(self):
+        return self.comments.all()    
 
     @property
     def comments_count(self):
@@ -127,8 +131,8 @@ class Likes(models.Model):
 
 # comments model
 class Comments(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name="comments")
     comment = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
 

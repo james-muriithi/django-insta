@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block 'content' %}
+<section class="py-5 posts container-xl" id="posts">
+    <div class="row mx-0 mt-3 pt-5">
+        <div class="col-lg-7 bg-light py-3 px-0">
+            <div class="post-card">
+                <div class="user-details d-flex border-bottom border-default align-items-center pb-2 px-2">
+                    <img src="{{image.user.avatar}}" alt="{{image.user}}" class="img-40 rounded-circle">
+                    <h5 class="fw-bold ps-3 text-capitalize mb-0">{{image.user.full_name}}</h5>
+                </div>
+                <div class="post-details">
+                    <img src="{{image.image_url}}" alt="{{image.title}}" class="post-image img-fluid">
+                </div>
+                <div class="cta pt-2">
+                    <div class="d-flex justify-content-center">
+                        <a href="#" class="btn btn-sm me-1">
+                            <span class="material-icons">&#xe87e</span>
+                        </a>
+                        <button class="btn btn-sm pt-0">
+                            <img src="./images/comment.svg" alt="" class="img-fluid">
+                        </button>
+
+                        <div class="date ms-auto text-muted pe-2">
+                            {{image.created_at}}
+                        </div>
+                    </div>
+                    <p class="text-muted px-2">
+                        {{image.likes_count}} likes
+                    </p>
+                </div>
+            </div>
+            <div class="comments px-2">
+                <div class="post-comment d-flex pb-3">
+                    <img src="{{user.avatar}}" alt=""
+                        class="img-30 rounded-circle">
+                    <div class="col ps-2">
+                        <input type="text" class="border border-primary form-control w-100 rounded-pill text-primary"
+                            placeholder="Write a comment...">
+                        <p class="text-muted text-sm">Press enter to post</p>
+                    </div>
+                </div>
+                {% for comment in image.all_comments %}
+                <div class="comment-card d-flex mb-3">
+                    <div class="">
+                        <img src="{{ comment.user.avatar }}" alt="" class="img-30 rounded-circle">
+                    </div>
+                    <div class="ps-2">
+                        <p class="">{{comment.comment}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% include 'partials/suggestions.html' %}
+    </div>
+</section>
+{% endblock 'content' %}
