@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block 'content' %}
+<section id="body" class="pt-5">
+    <div class="container-xl pt-4 pt-xl-5">
+        <div class="user-details row pb-2">
+            <div class="col-3 col-md-2">
+                <img src="https://avatars.githubusercontent.com/u/26818458?v=4" alt="" class="img-60 rounded-circle">
+            </div>
+            <div class="h-100 pt-2 col-sm col-9">
+                <h5 class="fw-bold text-capitalize mb-0 text-md-start">John Doe</h5>
+                <div class="d-flex pt-2">
+                    <div class="me-3">
+                        <span class="fw-bold">79</span> posts
+                    </div>
+                    <div class="me-3">
+                        <span class="fw-bold">79</span> following
+                    </div>
+                    <div class="me-3">
+                        <span class="fw-bold">79</span> followers
+                    </div>
+                </div>
+            </div>
+            <div class=" text-end col-12 col-sm mt-3 mt-sm-0">
+                <button class="btn btn-primary text-white px-3 btn-sm">Follow</button>
+            </div>
+        </div>
+        <div class="pt-4">
+            <div class="row mx-0">
+                <div class="col-12">
+                    <h3 class="fw-bold">Posts</h3>
+                    <hr class="mt-0">
+                </div>
+                <div class="col-sm-6 col-lg-4 col-xl-4 mb-3">
+                    <div class="post-card">
+                        <img src="./images/post.png" alt="" class="post-image img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

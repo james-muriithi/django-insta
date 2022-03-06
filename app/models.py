@@ -21,16 +21,16 @@ class User(AbstractUser):
         return f'https://ui-avatars.com/api/?name={self.url_formatted_name}&background=8655ff&color=fff'
 
     @property
-    def user_followers(self):
-        followers = self.followers.values_list('id', flat=True)
-        followers = list(followers)
-        followers.append(self.id)
-        return followers
+    def user_following(self):
+        following = self.following.values_list('id', flat=True)
+        following = list(following)
+        following.append(self.id)
+        return following
 
     @classmethod
     def suggested_follows(cls, user):
 
-        users = cls.objects.exclude(id__in=user.user_followers).exclude(is_superuser=True)
+        users = cls.objects.exclude(id__in=user.user_following).exclude(is_superuser=True)
         return users
 
 # image model
@@ -87,7 +87,7 @@ class Image(models.Model):
 
     @classmethod
     def user_timeline_images(cls, user):
-        images = cls.objects.filter(user__id__in=user.user_followers)
+        images = cls.objects.filter(user__id__in=user.user_following)
         return images
 
     def __str__(self):
@@ -159,11 +159,11 @@ class Comments(models.Model):
 class Follower(models.Model):
     follower = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='followers')
-    following = models.ForeignKey(User, on_delete=models.CASCADE)
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.user.username
+        return self.follower.full_name or self.follower.username
 
     class Meta:
         ordering = ['-created_at']

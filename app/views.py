@@ -1,4 +1,5 @@
 from pyexpat.errors import messages
+from urllib import request
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 import cloudinary
@@ -6,7 +7,7 @@ import cloudinary.uploader
 import cloudinary.api
 
 from app.forms import UploadImageForm
-from .models import Comments, Image, Likes, User
+from .models import Comments, Follower, Image, Likes, User
 
 # Create your views here.
 
@@ -55,16 +56,42 @@ def save_comment(request, image_id):
 
 
 # like image
-@login_required(login_url='/accounts/login/')
+@login_required()
 def like_image(request, id):
     like = Likes.objects.filter(image_id=id, user_id=request.user.id).first()
     # check if the user has already liked the image
-    if Likes.objects.filter(image_id=id, user_id=request.user.id).exists():
+    if like:
         # unlike the image
         like.delete()
 
         return redirect(request.META.get('HTTP_REFERER') or 'index')
     else:
-        like = Likes(image_id=id, user=request.user)
-        like.save()
+        image = Image.get_image(id)
+        if image and image.user.id is not request.user.id:
+            like = Likes(image_id=id, user=request.user)
+            like.save()
         return redirect(request.META.get('HTTP_REFERER') or 'index')
+
+# follow user
+
+
+@login_required()
+def follow_user(request, user_id):
+    user = User.objects.get(id=user_id)
+    follower = Follower.objects.filter(
+        follower=user, following=request.user).first()
+    # check if the user has already liked the image
+    if follower:
+        # unlike the image
+        follower.delete()
+
+        return redirect(request.META.get('HTTP_REFERER') or 'index')
+    else:
+        follower = Follower(follower=user, following=request.user)
+        follower.save()
+        return redirect(request.META.get('HTTP_REFERER') or 'index')
+
+
+@login_required()
+def profile(request, user=None):
+    return render(request, 'profile.html')
