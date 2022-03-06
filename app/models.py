@@ -14,11 +14,7 @@ class User(AbstractUser):
 
     @property
     def url_formatted_name(self):
-        return self.full_name.replace(' ', '+')
-
-    def suggest_follow(self):
-        # return self.objects.exclude(id__in=self.followers.append(self.get('id')))
-        return []
+        return self.full_name.replace(' ', '+') or self.username
 
     @property
     def avatar(self):

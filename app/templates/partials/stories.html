@@ -1,13 +1,13 @@
 <section id="body" class="pt-5">
     <div class="container-xl pt-4 pt-xl-5">
         <div class="users d-flex overflow-hidden">
-            <div class="user-profile me-3 center border border-primary rounded-circle img-80">
+            <div class="user-profile me-3 center border border-primary rounded-circle img-80" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
                 <span class="material-icons fs-2 text-primary">add</span>
             </div>
             {% for suggestion in suggested_followers %}
             <a href="#" class="user-profile p-1 me-3 center border border-primary rounded-circle img-80">
-                <img src="{{suggestion.avatar}}" alt=""
-                    class="rounded-circle w-100 h-100">
+                <img src="{{suggestion.avatar}}" alt="" class="rounded-circle w-100 h-100">
             </a>
             {% endfor %}
         </div>
