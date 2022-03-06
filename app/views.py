@@ -5,14 +5,16 @@ import cloudinary.uploader
 import cloudinary.api
 
 from app.forms import UploadImageForm
-from .models import Image
+from .models import Image, User
 
 # Create your views here.
 
 
 @login_required()
 def index(request):
-    return render(request, 'index.html')
+    images = Image.get_images_by_user(request.user)
+    suggested_followers = User.suggested_follows(user=request.user)
+    return render(request, 'index.html', {'images': images, 'suggested_followers': suggested_followers})
 
 
 @login_required()
@@ -24,7 +26,7 @@ def upload(request):
             image = form.save(commit=False)
             image.user = request.user
             image.save()
-            
+
             return redirect(request.META.get('HTTP_REFERER'), {'success': 'Image Uploaded Successfully'})
 
     return redirect(request.META.get('HTTP_REFERER'), {'error': 'Image Uploaded Successfully'})

@@ -1,9 +1,6 @@
-{% extends 'base.html' %}
-
-{% block 'content' %}
 <section id="body" class="pt-5">
     <div class="container-xl pt-4 pt-xl-5">
-        <div class="users d-flex">
+        <div class="users d-flex overflow-hidden">
             <div class="user-profile me-3 center border border-primary rounded-circle img-80">
                 <span class="material-icons fs-2 text-primary">add</span>
             </div>
@@ -18,16 +15,3 @@
         </div>
     </div>
 </section>
-
-<section class="py-5 posts container-sm" id="posts">
-    <div class="row mx-0">
-        <div class="col-lg-7 bg-light py-3 px-0">
-            {{suggested_followers}}
-            {% for image in images %}
-            {% include 'partials/image-card.html' %}
-            {% endfor %}
-        </div>
-        {% include 'partials/suggestions.html' %}
-    </div>
-</section>
-{% endblock %}
