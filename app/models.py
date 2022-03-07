@@ -26,11 +26,11 @@ class User(AbstractUser):
 
     @property
     def following_count(self):
-        return self.followers.count()  
+        return self.followers.count()
 
     @property
     def followers_count(self):
-        return self.following.count()        
+        return self.following.count()
 
     @property
     def user_following(self):
@@ -105,6 +105,13 @@ class Image(models.Model):
         following = list(user.user_following)
         following.append(user.id)
         images = cls.objects.filter(user__id__in=following)
+        return images
+
+    #  search images using image title
+    @classmethod
+    def search_image(cls, search_term):
+        images = cls.objects.filter(
+            title__icontains=search_term)
         return images
 
     def __str__(self):

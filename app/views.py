@@ -169,3 +169,15 @@ def update_profile(request):
             profile.save_profile()
 
     return redirect(request.META.get('HTTP_REFERER') or 'index')
+
+
+# search for images
+@login_required()
+def search_images(request):
+    if 'q' in request.GET and request.GET['q']:
+        search_term = request.GET.get('q').lower()
+        images = Image.search_image(search_term)
+
+        return render(request, 'search.html', {'images': images})
+    else:
+        return redirect('index')
