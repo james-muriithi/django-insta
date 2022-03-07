@@ -99,7 +99,7 @@ def like_image(request, id):
 def follow_user(request, user_id):
     user = User.objects.get(id=user_id)
     follower = Follower.objects.filter(
-        follower=user, following=request.user).first()
+        following=user, follower=request.user).first()
     # check if the user has already liked the image
     if follower:
         # unlike the image
@@ -107,7 +107,7 @@ def follow_user(request, user_id):
 
         return redirect(request.META.get('HTTP_REFERER') or 'index')
     else:
-        follower = Follower(follower=user, following=request.user)
+        follower = Follower(following=user, follower=request.user)
         follower.save()
         return redirect(request.META.get('HTTP_REFERER') or 'index')
 

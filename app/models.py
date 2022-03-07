@@ -25,10 +25,11 @@ class User(AbstractUser):
         return self.profile.avatar
 
     @property
-    def user_following(self):
-        following = self.following.values_list('id', flat=True)
-        following = list(following)
-        following.append(self.id)
+    def user_following(self, append_self=True):
+        following = self.followers.values_list('following__id', flat=True)
+        if append_self:
+            following = list(following)
+            following.append(self.id)
         return following
 
     @classmethod
