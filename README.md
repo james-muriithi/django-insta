@@ -52,9 +52,13 @@ python3.8 manage.py runserver
 * open the browser and navigate to http://127.0.0.1:8000/ to see the application in action
 
 ## Design
-
+Here is the Design
+![Design](./screenshots/Home.png)
+![Modal](./screenshots/Profile.png)
+![Modal](./screenshots/Signup.png)
+![Modal](./screenshots/Login.png)
 ## Screenshot
-
+![Screnshot](./screenshots/screenshot.png)
 ## Live link
 [Here is the link to the live site](https://django-insta-jm.herokuapp.com/)
 ## Contact details

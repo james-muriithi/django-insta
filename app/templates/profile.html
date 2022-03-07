@@ -2,7 +2,7 @@
 
 {% block 'content' %}
 <section id="body" class="pt-5">
-    <div class="container-xl pt-4 pt-xl-5">
+    <div class="container-xl pt-4 pt-xl-5 mt-4">
         <div class="user-details row pb-2">
             <div class="col-3 col-md-2">
                 <img src="{% if user.avatar %} {{user.avatar}} {% else %} {{user.fallback_avatar}} {% endif %}" alt="" class="img-60 rounded-circle">
@@ -14,10 +14,10 @@
                         <span class="fw-bold">{{images|length}}</span> posts
                     </div>
                     <div class="me-3">
-                        <span class="fw-bold">{{user.following|length}}</span> following
+                        <span class="fw-bold">{{user.following_count}}</span> following
                     </div>
                     <div class="me-3">
-                        <span class="fw-bold">{{user.followers|length}}</span> followers
+                        <span class="fw-bold">{{user.followers_count}}</span> followers
                     </div>
                 </div>
             </div>
@@ -47,6 +47,11 @@
                 </div>
                 {% include 'partials/edit-image-modal.html'   %}
                 {% endfor %}
+                {% if images|length == 0 %}
+                    <p class="px-2">
+                        No posts 
+                    </p>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -25,6 +25,14 @@ class User(AbstractUser):
         return self.profile.avatar
 
     @property
+    def following_count(self):
+        return self.followers.count()  
+
+    @property
+    def followers_count(self):
+        return self.following.count()        
+
+    @property
     def user_following(self):
         following = self.followers.values_list('following__id', flat=True)
         return following
@@ -36,7 +44,7 @@ class User(AbstractUser):
         following.append(user.id)
 
         users = cls.objects.exclude(
-            id__in=following).exclude(is_superuser=True)
+            id__in=following)
         return users.all()
 
 # image model
@@ -94,7 +102,8 @@ class Image(models.Model):
 
     @classmethod
     def user_timeline_images(cls, user):
-        following = user.user_following
+        following = list(user.user_following)
+        following.append(user.id)
         images = cls.objects.filter(user__id__in=following)
         return images
 
