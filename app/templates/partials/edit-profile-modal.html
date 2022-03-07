@@ -1,0 +1,29 @@
+<div class="modal fade" id="profile-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'update_profile' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="user_id" value="38">
+                    <div class="form-group mt-3">
+                        <label for="exampleFormControlTextarea1">Caption</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="bio"
+                            required=""></textarea>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="exampleFormControlFile1">Upload Photo</label>
+                        <input type="file" class="form-control" id="exampleFormControlFile1" name="avatar"
+                            required="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary text-white">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

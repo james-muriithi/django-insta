@@ -12,5 +12,6 @@ urlpatterns = [
     path('single-image/<id>/like', views.like_image, name="like_image"),
     path('follow/<user_id>', views.follow_user, name="follow_user"),
     path('profile', views.profile, name='profile'),
+    path('profile/update/', views.update_profile, name='update_profile'),
     path('user/<user_id>', views.user_profile, name='user_profile')
 ]

@@ -18,7 +18,8 @@ class User(AbstractUser):
 
     @property
     def avatar(self):
-        return f'https://ui-avatars.com/api/?name={self.url_formatted_name}&background=8655ff&color=fff'
+        avatar = self.profile.avatar or f'https://ui-avatars.com/api/?name={self.url_formatted_name}&background=8655ff&color=fff'
+        return avatar
 
     @property
     def user_following(self):
@@ -30,7 +31,8 @@ class User(AbstractUser):
     @classmethod
     def suggested_follows(cls, user):
 
-        users = cls.objects.exclude(id__in=user.user_following).exclude(is_superuser=True)
+        users = cls.objects.exclude(
+            id__in=user.user_following).exclude(is_superuser=True)
         return users
 
 # image model
@@ -100,7 +102,8 @@ class Image(models.Model):
 
 # profile model
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='profile')
     avatar = CloudinaryField('image')
     bio = models.TextField(max_length=500, blank=True, null=True)
 
@@ -160,7 +163,8 @@ class Comments(models.Model):
 class Follower(models.Model):
     follower = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='followers')
-    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
+    following = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='following')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
