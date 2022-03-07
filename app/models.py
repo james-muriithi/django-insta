@@ -25,18 +25,18 @@ class User(AbstractUser):
         return self.profile.avatar
 
     @property
-    def user_following(self, append_self=True):
+    def user_following(self):
         following = self.followers.values_list('following__id', flat=True)
-        if append_self:
-            following = list(following)
-            following.append(self.id)
         return following
 
     @classmethod
     def suggested_follows(cls, user):
 
+        following = list(user.user_following)
+        following.append(user.id)
+
         users = cls.objects.exclude(
-            id__in=user.user_following).exclude(is_superuser=True)
+            id__in=following).exclude(is_superuser=True)
         return users.all()
 
 # image model
@@ -94,7 +94,8 @@ class Image(models.Model):
 
     @classmethod
     def user_timeline_images(cls, user):
-        images = cls.objects.filter(user__id__in=user.user_following)
+        following = user.user_following
+        images = cls.objects.filter(user__id__in=following)
         return images
 
     def __str__(self):
