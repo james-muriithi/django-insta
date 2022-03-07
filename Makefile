@@ -9,3 +9,6 @@ migrate:
 
 freeze:
 	pip freeze > requirements.txt		
+
+test:
+	python manage.py test

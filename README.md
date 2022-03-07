@@ -1,8 +1,8 @@
-# Gallery
-created by James Muriithi on 28/02/2022
+# Insta
+created by James Muriithi on 06/03/2022
 
 ## Description
-This is a gallery app to showcase all the beatiful images of different locations and categories. It is built with Django and uploads images to cloudinary
+This is an instagram clone where users follow each other and can see the images they post. One can like and comment on posted images
 
 ## Technologies Used
 The following technologies have been used on this project:

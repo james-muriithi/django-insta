@@ -1,5 +1,3 @@
-from pyexpat.errors import messages
-from urllib import request
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 import cloudinary
