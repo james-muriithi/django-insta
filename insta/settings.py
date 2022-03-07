@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 from decouple import config
+import dj_database_url
+import django_heroku
 
 # cloudinary
 import cloudinary
@@ -34,12 +36,12 @@ SECRET_KEY = 'django-insecure-b)2lc84-g-48bhq-7hf913n)3#ho3$ss@nv+7hm-lxhv8n5w8z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
-ACCOUNT_ACTIVATION_DAYS = 14 # One-week activation window
+ACCOUNT_ACTIVATION_DAYS = 14  # One-week activation window
 
-REGISTRATION_OPEN=True
+REGISTRATION_OPEN = True
 
 AUTH_USER_MODEL = 'app.User'
 LOGIN_REDIRECT_URL = '/'
@@ -56,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'django_registration',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -92,20 +95,26 @@ WSGI_APPLICATION = 'insta.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'insta',
-        'USER': config('DB_USER', default=''),
-        'PASSWORD':config('DB_PASSWORD', default=''),
-    },
-    'sqlite': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if ENV == 'production':
+    DATABASES = {
+        'default': dj_database_url.config(default=config('DATABASE_URL'))
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'gallery',
+            'USER': config('DB_USER', default=''),
+            'PASSWORD': config('DB_PASSWORD', default=''),
+        },
+        'sqlite': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
-
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)    
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -117,9 +126,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    # },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
@@ -131,7 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -141,7 +150,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -160,3 +174,7 @@ cloudinary.config(
     api_secret=config('CLOUDINARY_API_SECRET', default=''),
     secure=True
 )
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
