@@ -1,7 +1,8 @@
 {% load static %}
 <div class="post-card">
     <div class="user-details d-flex border-bottom border-default align-items-center pb-2 px-2">
-        <img src="{% if image.user.avatar %} {{image.user.avatar}} {% else %} {{image.user.fallback_avatar}} {% endif %}" alt="{{image.user}}" class="img-40 rounded-circle">
+        <img src="{% if image.user.avatar %} {{image.user.avatar}} {% else %} {{image.user.fallback_avatar}} {% endif %}"
+            alt="{{image.user}}" class="img-40 rounded-circle">
         <a href="{% url 'user_profile' user_id=image.user.username %}">
             <h5 class="fw-bold ps-3 text-capitalize mb-0 text-dark">{{image.user.full_name}}</h5>
         </a>
@@ -9,6 +10,12 @@
     <a href="{% url 'single_image' id=image.id %}" class="post-details">
         <img src="{{image.image_url}}" alt="" class="post-image img-fluid">
     </a>
+    <div class="px-2">
+        <h3 class="fw-bold">{{image.title}}</h3>
+        <p class="">
+            {{image.caption | truncatechars:100}}
+        </p>
+    </div>
     <div class="cta pt-2">
         <div class="d-flex justify-content-center">
             {% if user.id == image.user.id %}
