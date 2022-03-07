@@ -59,6 +59,9 @@ Here is the Design
 ![Modal](./screenshots/Login.png)
 ## Screenshot
 ![Screnshot](./screenshots/screenshot.png)
+![Screnshot](./screenshots/screenshot2.png)
+![Screnshot](./screenshots/screenshot3.png)
+![Screnshot](./screenshots/screenshot4.png)
 ## Live link
 [Here is the link to the live site](https://django-insta-jm.herokuapp.com/)
 ## Contact details

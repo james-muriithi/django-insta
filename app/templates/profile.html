@@ -5,10 +5,16 @@
     <div class="container-xl pt-4 pt-xl-5 mt-4">
         <div class="user-details row pb-2">
             <div class="col-3 col-md-2">
-                <img src="{% if user.avatar %} {{user.avatar}} {% else %} {{user.fallback_avatar}} {% endif %}" alt="" class="img-60 rounded-circle">
+                <img src="{% if user.avatar %} {{user.avatar}} {% else %}{{user.fallback_avatar}}{% endif %}" alt=""
+                    class="img-60 rounded-circle">
             </div>
             <div class="h-100 pt-2 col-sm col-9">
-                <h5 class="fw-bold text-capitalize mb-0 text-md-start">{{user.full_name}}</h5>
+                <h5 class="fw-bold text-capitalize mb-0 text-md-start">
+                    {{user.full_name}}
+                    <button class="btn bt-sm" data-bs-toggle="modal" data-bs-target="#profile-modal">
+                        <span class="material-icons">edit</span>
+                    </button>
+                </h5>
                 <div class="d-flex pt-2">
                     <div class="me-3">
                         <span class="fw-bold">{{images|length}}</span> posts
@@ -45,12 +51,12 @@
                         </a>
                     </div>
                 </div>
-                {% include 'partials/edit-image-modal.html'   %}
+                {% include 'partials/edit-image-modal.html' %}
                 {% endfor %}
                 {% if images|length == 0 %}
-                    <p class="px-2">
-                        No posts 
-                    </p>
+                <p class="px-2">
+                    No posts
+                </p>
                 {% endif %}
             </div>
         </div>
