@@ -46,7 +46,8 @@
 
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{user.avatar}}" alt="" class="avatar rounded-circle img-30">
+                        <img src="{% if user.avatar %} {{user.avatar}} {% else %} {{user.fallback_avatar}} {% endif %}"
+                            alt="" class="avatar rounded-circle img-30">
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end bg-primary" aria-labelledby="navbarDropdown"

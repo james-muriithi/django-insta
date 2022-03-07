@@ -15,7 +15,7 @@ from .models import Comments, Follower, Image, Likes, Profile, User
 @login_required()
 def index(request):
     images = Image.user_timeline_images(request.user)
-    suggested_followers = User.suggested_follows(user=request.user)
+    suggested_followers = User.suggested_follows(user=request.user)[:10]
     return render(request, 'index.html', {'images': images, 'suggested_followers': suggested_followers})
 
 
@@ -59,7 +59,7 @@ def image_delete(request, image_id):
 @login_required()
 def single_image(request, id):
     image = Image.get_image(id)
-    suggested_followers = User.suggested_follows(user=request.user)
+    suggested_followers = User.suggested_follows(user=request.user)[:10]
     return render(request, 'single-image.html', {'image': image, 'suggested_followers': suggested_followers})
 
 

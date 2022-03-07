@@ -5,7 +5,8 @@
     <div class="container-xl pt-4 pt-xl-5">
         <div class="user-details row pb-2">
             <div class="col-3 col-md-2">
-                <img src="{% if suggestion.avatar %} {{suggestion.avatar}} {% else %} {{suggestion.fallback_avatar}} {% endif %}" alt="" class="img-60 rounded-circle">
+                <img src="{% if suggestion.avatar %} {{suggestion.avatar}} {% else %} {{suggestion.fallback_avatar}} {% endif %}"
+                    alt="" class="img-60 rounded-circle">
             </div>
             <div class="h-100 pt-2 col-sm col-9">
                 <h5 class="fw-bold text-capitalize mb-0 text-md-start">{{usr.full_name}}</h5>
@@ -34,9 +35,11 @@
                 </div>
                 {% for image in images %}
                 <div class="col-sm-6 col-lg-4 col-xl-4 mb-3">
-                    <div class="post-card">
-                        <img src="{{image.image_url}}" alt="" class="post-image img-fluid">
-                    </div>
+                    <a href="{% url 'single_image' id=image.id  %}">
+                        <div class="post-card">
+                            <img src="{{image.image_url}}" alt="" class="post-image img-fluid">
+                        </div>
+                    </a>
                 </div>
                 {% endfor %}
             </div>

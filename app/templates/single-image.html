@@ -15,6 +15,12 @@
                 <div class="post-details">
                     <img src="{{image.image_url}}" alt="{{image.title}}" class="post-image img-fluid">
                 </div>
+                <div class="">
+                    <h3 class="fw-bold">{{image.title}}</h3>
+                    <p class="">
+                        {{image.caption}}
+                    </p>
+                </div>
                 <div class="cta pt-2">
                     <div class="d-flex justify-content-center">
                         {% if user.id == image.user.id %}
@@ -42,7 +48,7 @@
             </div>
             <div class="comments px-2" id="comment">
                 <div class="post-comment d-flex pb-3">
-                    <img src="{{user.avatar}}" alt="" class="img-30 rounded-circle">
+                    <img src="{% if user.avatar %} {{user.avatar}} {% else %} {{user.fallback_avatar}} {% endif %}" alt="" class="img-30 rounded-circle">
                     <div class="col ps-2">
                         <form action="{% url 'save_comment' image_id=image.id %}" method="post">
                             {% csrf_token %}
@@ -56,7 +62,7 @@
                 {% for comment in image.all_comments %}
                 <div class="comment-card d-flex mb-3">
                     <div class="">
-                        <img src="{{ comment.user.avatar }}" alt="" class="img-30 rounded-circle">
+                        <img src="{% if comment.user.avatar %} {{comment.user.avatar}} {% else %} {{comment.user.fallback_avatar}} {% endif %}" alt="" class="img-30 rounded-circle">
                     </div>
                     <div class="ps-2 col">
                         <p class="mb-1">{{comment.comment}}</p>
