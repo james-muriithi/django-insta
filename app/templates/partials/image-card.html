@@ -1,7 +1,7 @@
 {% load static %}
 <div class="post-card">
     <div class="user-details d-flex border-bottom border-default align-items-center pb-2 px-2">
-        <img src="{{image.user.avatar}}" alt="{{image.user}}" class="img-40 rounded-circle">
+        <img src="{% if image.user.avatar %} {{image.user.avatar}} {% else %} {{image.user.fallback_avatar}} {% endif %}" alt="{{image.user}}" class="img-40 rounded-circle">
         <a href="{% url 'user_profile' user_id=image.user.username %}">
             <h5 class="fw-bold ps-3 text-capitalize mb-0 text-dark">{{image.user.full_name}}</h5>
         </a>

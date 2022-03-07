@@ -179,8 +179,8 @@ cloudinary.config(
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = config('MAIL_USERNAME')
-EMAIL_HOST_PASSWORD = config('MAIL_PASSWORD')
+EMAIL_HOST_USER = config('MAIL_USERNAME', default='')
+EMAIL_HOST_PASSWORD = config('MAIL_PASSWORD', default='')
 
 
 # Activate Django-Heroku.
