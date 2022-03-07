@@ -6,7 +6,7 @@
                 <span class="material-icons fs-2 text-primary">add</span>
             </div>
             {% for suggestion in suggested_followers %}
-            <a href="{% url 'user_profile' user_id=suggestion.id %}"
+            <a href="{% url 'user_profile' user_id=suggestion.username %}"
                 class="user-profile p-1 me-3 center border border-primary rounded-circle img-80">
                 <img src="{% if suggestion.avatar %} {{suggestion.avatar}} {% else %} {{suggestion.fallback_avatar}} {% endif %}"
                     alt="" class="rounded-circle w-100 h-100">
