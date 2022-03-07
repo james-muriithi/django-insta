@@ -12,12 +12,16 @@
                     <div class="form-group mt-3">
                         <label for="exampleFormControlTextarea1">Caption</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="bio"
-                            required=""></textarea>
+                            required="">{{user.profile.bio}}</textarea>
                     </div>
                     <div class="form-group mt-3">
                         <label for="exampleFormControlFile1">Upload Photo</label>
-                        <input type="file" class="form-control" id="exampleFormControlFile1" name="avatar"
-                            required="">
+                        <div>
+                            {% if user.profile.avatar %}
+                            <img src="{{user.profile.avatar}}" alt="" class="img-fluid" style="height: 30px;">
+                            {% endif %}
+                        </div>
+                        <input type="file" class="form-control" id="exampleFormControlFile1" name="avatar" >
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary text-white">Save</button>

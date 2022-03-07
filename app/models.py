@@ -17,9 +17,12 @@ class User(AbstractUser):
         return self.full_name.replace(' ', '+') or self.username
 
     @property
+    def fallback_avatar(self):
+        return f'https://ui-avatars.com/api/?name={self.url_formatted_name}&background=8655ff&color=fff'
+
+    @property
     def avatar(self):
-        avatar = self.profile.avatar or f'https://ui-avatars.com/api/?name={self.url_formatted_name}&background=8655ff&color=fff'
-        return avatar
+        return self.profile.avatar
 
     @property
     def user_following(self):
@@ -33,7 +36,7 @@ class User(AbstractUser):
 
         users = cls.objects.exclude(
             id__in=user.user_following).exclude(is_superuser=True)
-        return users
+        return users.all()
 
 # image model
 

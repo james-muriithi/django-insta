@@ -7,7 +7,7 @@
             </div>
             {% for suggestion in suggested_followers %}
             <a href="#" class="user-profile p-1 me-3 center border border-primary rounded-circle img-80">
-                <img src="{{suggestion.avatar}}" alt="" class="rounded-circle w-100 h-100">
+                <img src="{% if suggestion.avatar %} {{suggestion.avatar}} {% else %} {{suggestion.fallback_avatar}} {% endif %}" alt="" class="rounded-circle w-100 h-100">
             </a>
             {% endfor %}
         </div>
